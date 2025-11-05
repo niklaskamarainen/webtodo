@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/niklaskamarainen/webtodo/issues"
   },
-  "homepage": "https://github.com/niklaskamarainen/webtodo#readme"
+  "homepage": "https://github.com/niklaskamarainen/webtodo#readme",
+  "dependencies": {
+    "axios": "^1.13.2"
+  }
 }
