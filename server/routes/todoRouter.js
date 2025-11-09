@@ -1,10 +1,11 @@
 import { pool } from "../helper/db.js"
 import { Router } from "express"
+import { auth } from "../helper/auth.js"
 
 
 const router = Router()
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   pool.query("SELECT * FROM task", (err, result) => {
     if (err) {
       return next(err)
@@ -14,12 +15,13 @@ router.get("/", (req, res) => {
 })
 
 // Other routes (create, delete) here
-router.post("/create", (req, res) => {
+router.post("/create", auth,(req, res, next) => {
   //const pool = openDb()
   const { task } = req.body
 
   if (!task) {
     const error = new Error("Task is required")
+    error.status = 400
     return next(error)
   }
 
@@ -38,7 +40,7 @@ router.post("/create", (req, res) => {
 })
 
 
-router.delete("/delete/:id", (req, res) => {
+router.delete("/delete/:id", (req, res, next) => {
   //const pool = openDb()
   const { id } = req.params
 
